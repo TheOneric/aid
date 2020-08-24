@@ -1,0 +1,22 @@
+# Java
+*.class
+
+# Build
+/build
+.externalNativeBuild
+.cxx
+
+# Gradle
+*.iml
+.gradle
+/local.properties
+gradle/
+gradlew
+gradlew.bat
+gradle.properties
+
+# IDE
+/.idea
+.DS_Store
+/captures
+
