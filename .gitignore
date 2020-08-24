@@ -10,10 +10,10 @@
 *.iml
 .gradle
 /local.properties
-gradle/
-gradlew
-gradlew.bat
-gradle.properties
+#gradle/
+#gradlew
+#gradlew.bat
+#gradle.properties
 
 # IDE
 /.idea
