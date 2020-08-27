@@ -6,6 +6,9 @@
 .externalNativeBuild
 .cxx
 
+# Build webextensions
+*.xpi
+
 # Gradle
 *.iml
 .gradle
