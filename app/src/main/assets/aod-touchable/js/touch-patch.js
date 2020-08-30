@@ -34,7 +34,7 @@ window.addEventListener('beforescriptexecute',
                     `
                     //----BEGIN-CHANGES----//
                     function t(t){
-                        //aid_log_dbg("¡DEBUG-MSG!");
+                        //console.log("¡DEBUG-MSG!");
                         //if(i.preventDefaultEvents&&t.preventDefault(),s){
                             var n=t.touches[0].pageX,o=t.touches[0].pageY,l=r-n,u=a-o;Math.abs(l)>=i.min_move_x?(e(),l>0?i.wipeLeft():i.wipeRight()):Math.abs(u)>=i.min_move_y&&(e(),u>0?i.wipeDown():i.wipeUp())
                         //}
@@ -43,6 +43,30 @@ window.addEventListener('beforescriptexecute',
                     `,
                     aid_log_err
                 ))
+                /*.then(src => src.replace(
+                    'function p(e){if(!_&&t.settings.swipePropagation&&f(e),!w&&_&&h(e)){var i=d(e),n={pageX:i.pageX,pageY:i.pageY},r=n.pageX-m.pageX,a=n.pageY-m.pageY;l(r,a),m=n;var s=(new Date).getTime(),u=s-v;u>0&&(y.x=r/u,y.y=a/u,v=s),o(r,a)&&(e.stopPropagation(),e.preventDefault())}}',
+                    `
+                    function p(e) {
+                      if(!_&&t.settings.swipePropagation&&f(e),!w&&_&&h(e)) {
+                        var i=d(e),
+                        n={pageX:i.pageX,pageY:i.pageY},
+                        r=n.pageX-m.pageX,
+                        a=n.pageY-m.pageY;
+                        l(r,a),
+                        m=n;
+                        var s=(new Date).getTime(),
+                        u=s-v;
+                        u>0 && (y.x=r/u,y.y=a/u,v=s),
+                        o(r,a) && (e.stopPropagation(),e.preventDefault());
+
+                         console.log(
+                           "hi"+r+"   "+t.contentHeight+"  "+t.scrollTop
+                         );
+                      }
+                    }
+                    `,
+                    aid_log_err
+                ))*/
                 .then(new_src => {
 					window.eval(new_src);
                     aid_log_info("Touch-Patch applied.")

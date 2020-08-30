@@ -30,7 +30,7 @@
   "browser_specific_settings": {
     "gecko": {
 	  "strict_min_version": "48.0",
-      "id": "aod-tochable@oneric.stub"
+      "id": "aod-touchable@oneric.stub"
     }
   }
 
