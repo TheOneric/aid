@@ -43,12 +43,12 @@ window.addEventListener('beforescriptexecute',
                     `,
                     aid_log_err
                 ))
-                /*.then(src => src.replace(
+                .then(src => src.replace(
                     'function p(e){if(!_&&t.settings.swipePropagation&&f(e),!w&&_&&h(e)){var i=d(e),n={pageX:i.pageX,pageY:i.pageY},r=n.pageX-m.pageX,a=n.pageY-m.pageY;l(r,a),m=n;var s=(new Date).getTime(),u=s-v;u>0&&(y.x=r/u,y.y=a/u,v=s),o(r,a)&&(e.stopPropagation(),e.preventDefault())}}',
                     `
-                    function p(e) {
-                      if(!_&&t.settings.swipePropagation&&f(e),!w&&_&&h(e)) {
-                        var i=d(e),
+                    function p(event) {
+                      if(!_&&t.settings.swipePropagation&&f(event),!w&&_&&h(event)) {
+                        var i=d(event),
                         n={pageX:i.pageX,pageY:i.pageY},
                         r=n.pageX-m.pageX,
                         a=n.pageY-m.pageY;
@@ -56,17 +56,30 @@ window.addEventListener('beforescriptexecute',
                         m=n;
                         var s=(new Date).getTime(),
                         u=s-v;
-                        u>0 && (y.x=r/u,y.y=a/u,v=s),
-                        o(r,a) && (e.stopPropagation(),e.preventDefault());
+                        u>0 && (y.x=r/u,y.y=a/u,v=s);
+                        o(r,a);
+                        //o's return val is used by AoD to decide whether or not to cancel the event
+                        // But it is to unreliable to use on touch devices
 
-                         console.log(
-                           "hi"+r+"   "+t.contentHeight+"  "+t.scrollTop
-                         );
+                        //e comes from the super function i(e, t, i, n) and is what is being used in o(a1, a2)
+                        // function i envelops functions o,l,u,c,d,h,f,p
+                        if(
+                           !(a>=0&&e.scrollTop==0 || a<=0&&e.scrollTop+1>=(t.contentHeight-t.containerHeight))
+                          ) {
+                          event.stopPropagation();
+                          event.preventDefault();
+                        }
+
+                         /*console.log(
+                           "hi: "+a+"   "+t.contentHeight+" - "+t.containerHeight+" : "+e.scrollTop
+                         ); console.log(
+                           "BothNeg: " + (!(a>=0&&e.scrollTop==0 || a<=0&&e.scrollTop+2>=(t.contentHeight-t.containerHeight)))
+                         );*/
                       }
                     }
                     `,
                     aid_log_err
-                ))*/
+                ))
                 .then(new_src => {
 					window.eval(new_src);
                     aid_log_info("Touch-Patch applied.")
