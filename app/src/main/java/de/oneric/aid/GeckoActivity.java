@@ -8,6 +8,7 @@ import android.view.View;
 
 import org.mozilla.geckoview.GeckoResult;
 import org.mozilla.geckoview.GeckoRuntime;
+import org.mozilla.geckoview.GeckoRuntimeSettings;
 import org.mozilla.geckoview.GeckoSession;
 import org.mozilla.geckoview.GeckoView;
 import org.mozilla.geckoview.WebExtension;
@@ -15,8 +16,26 @@ import org.mozilla.geckoview.WebExtension;
 
 public class GeckoActivity extends AppCompatActivity {
 
+    private static final String TAG = "core/activity";
+
+    /**
+     * This app is single-task anyway and the codebase will always remain
+     * rather small, so I just let everything be global state singletons, lol.
+     * (at least these assumptions hold as long as I'm the unpaid maintainer
+     *   - if you forked this to add a bunch of shiny new features you should
+     *   consider taking a look at which parts of the code need access t what
+     *   and split things up accordingly to help keep it tidy)
+     */
     private GeckoView geckoView = null;
     private GeckoRuntime geckoRuntime = null;
+    private GeckoSession geckoSession = null;
+    private Config config = null;
+
+    public GeckoRuntime getRuntime() { return geckoRuntime; }
+    public GeckoSession getSession() { return geckoSession; }
+    public GeckoView    getView()    { return geckoView;    }
+    public Config       getConfig()  { return config;       }
+
 
     View.OnSystemUiVisibilityChangeListener hideControl = (int vis) -> {
         if((vis & View.SYSTEM_UI_FLAG_FULLSCREEN) != 0) {
@@ -29,6 +48,9 @@ public class GeckoActivity extends AppCompatActivity {
         }
     };
 
+    //TODO: Limit GeckoView to anime-on-demand.de, using:
+    //GeckoSession.NavigationDelegate.html#onLoadRequest
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +58,16 @@ public class GeckoActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_fullscreen);
 
+        config = new Config(this.getApplicationContext());
+
         //Init GeckoView
         geckoView = findViewById(R.id.geckoview);
-        GeckoSession session = new GeckoSession();
+        geckoSession = new GeckoSession();
         if(geckoRuntime == null)
             geckoRuntime = GeckoRuntime.create(this);
-        setUpGecko(geckoRuntime, session);
+        setUpGecko(geckoRuntime, geckoSession);
 
-        session.open(geckoRuntime);
-        geckoView.setSession(session);
-        session.loadUri("https://anime-on-demand.de/");
+        geckoSession.loadUri("https://"+Config.DOMAIN_AOD+"/");
 
         hideControl.onSystemUiVisibilityChange(View.SYSTEM_UI_FLAG_FULLSCREEN);
         getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(hideControl);
@@ -53,21 +75,31 @@ public class GeckoActivity extends AppCompatActivity {
 
 
     private void setUpGecko(GeckoRuntime runtime, GeckoSession session) {
-        final String LOG_TAG = "setUpGecko";
+        final String TAG = "core/setUp";
 
-        geckoRuntime.getSettings().setRemoteDebuggingEnabled(true);
-        geckoRuntime.getSettings().setLoginAutofillEnabled(true);
+        session.setPromptDelegate(new GeckoPromptHandler(this));
+        runtime.setLoginStorageDelegate(new GeckoAutofillHandler(this.config));
+
+        GeckoRuntimeSettings settings = geckoRuntime.getSettings();
+        settings.setRemoteDebuggingEnabled(true);
+        settings.setLoginAutofillEnabled(true);
+
+
         GeckoResult<WebExtension> res = geckoRuntime.getWebExtensionController().ensureBuiltIn(
                 "resource://android/assets/aod-touchable/",
                 "aod-touchable@oneric.stub"
         );
         res.then(we -> {
-            Log.d(LOG_TAG, "Successfully Installed: "+we.id);
+            Log.d(TAG, "Successfully Installed: "+we.id);
             return GeckoResult.fromValue(0);
         }, ex -> {
-            Log.e(LOG_TAG, "Webextension installation failed: " + ex.getMessage());
+            Log.e(TAG, "Webextension installation failed: " + ex.getMessage());
             return GeckoResult.fromValue(0);
         });
+
+        geckoSession.open(geckoRuntime);
+        geckoView.setSession(geckoSession);
+        geckoView.setAutofillEnabled(true);
     }
 
 
