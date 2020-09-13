@@ -78,6 +78,7 @@ public class GeckoActivity extends AppCompatActivity {
         final String TAG = "core/setUp";
 
         session.setPromptDelegate(new GeckoPromptHandler(this));
+        session.setNavigationDelegate(new GeckoNavigationDelegate(this));
         runtime.setLoginStorageDelegate(new GeckoAutofillHandler(this.config));
 
         GeckoRuntimeSettings settings = geckoRuntime.getSettings();

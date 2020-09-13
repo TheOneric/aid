@@ -26,11 +26,13 @@ public class Config {
 
     // All default config values (where applicable)
     private static final boolean DEF_SAVE_PW = false;
+    private static final boolean DEF_URILIMIT = true;
 
     // All keys (good thing at least the variable names make sense)
-    private static final String KEY_SAVE_PW = "nsamode";
-    private static final String KEY_USER    = "okyakusama";
-    private static final String KEY_PW      = "likelyinsufficient";
+    private static final String KEY_SAVE_PW  = "nsamode";
+    private static final String KEY_USER     = "okyakusama";
+    private static final String KEY_PW       = "likelyinsufficient";
+    private static final String KEY_URILIMIT = "stayfocused";
 
     public Config(Context context) {
         this.sprefs = context.getSharedPreferences("config", Context.MODE_PRIVATE);
@@ -39,6 +41,10 @@ public class Config {
 
     public boolean rememberLogin() {
         return sprefs.getBoolean(KEY_SAVE_PW, DEF_SAVE_PW);
+    }
+
+    public boolean limitURIs() {
+        return sprefs.getBoolean(KEY_URILIMIT, DEF_URILIMIT);
     }
 
     public String[] retrieveCredentials() {
@@ -66,6 +72,10 @@ public class Config {
 
     public void storeRememberLogin(boolean b) {
         edit(e -> e.putBoolean(KEY_SAVE_PW, b), false);
+    }
+
+    public void storeLimitURIs(boolean b) {
+        edit(e -> e.putBoolean(KEY_URILIMIT, b), false);
     }
 
     public void storeCredentials(String u, String p) {
