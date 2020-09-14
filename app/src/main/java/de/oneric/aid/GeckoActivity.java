@@ -66,9 +66,6 @@ public class GeckoActivity extends AppCompatActivity {
         }
     };
 
-    //TODO: Limit GeckoView to anime-on-demand.de, using:
-    //GeckoSession.NavigationDelegate.html#onLoadRequest
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
