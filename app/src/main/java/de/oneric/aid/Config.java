@@ -34,12 +34,6 @@ import android.content.SharedPreferences;
  */
 public class Config {
 
-    // It seemed a bit silly to create an own class for these few static values,
-    // and since there was no better place, I üut them here.
-    public static final String DOMAIN_AOD  = "anime-on-demand.de";
-
-
-    // Now for the actual Config stuff
     private final SharedPreferences sprefs;
 
     // All default config values (where applicable)

@@ -152,7 +152,8 @@ class GeckoAutofillHandler implements Autocomplete.LoginStorageDelegate {
 
     @Override
     public GeckoResult<LoginEntry[]> onLoginFetch(String domain) {
-        if(!domain.equals(Config.DOMAIN_AOD))
+        // Only accept base domain for autofill
+        if(!domain.equals(Util.DOMAIN_AOD))
             return null;
 
         String[] creds = config.retrieveCredentials();

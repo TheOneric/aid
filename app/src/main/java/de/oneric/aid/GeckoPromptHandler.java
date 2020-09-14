@@ -87,7 +87,7 @@ public class GeckoPromptHandler implements GeckoSession.PromptDelegate {
                                                      final AutocompleteRequest<LoginSelectOption> request) {
 
         if(!session.getAutofillSession().getRoot().getFocused()
-            || !session.getAutofillSession().getRoot().getDomain().equals(Config.DOMAIN_AOD)
+            || !session.getAutofillSession().getRoot().getDomain().equals(Util.DOMAIN_AOD)
         ) {
             return null;
         }

@@ -49,12 +49,7 @@ public class GeckoNavigationDelegate implements GeckoSession.NavigationDelegate 
         final String TAG = "core/uricontrol";
 
         // Only open "anime-on-demand.de" sites in-app
-        if(!config.limitURIs()
-           || request.uri
-                .replaceFirst("^https?://", "").replaceAll("(/.*)+$", "")
-                .matches("[^/]*\\.?anime-on-demand.de$")
-                //Why is [^/]* neccessary ? Does it always need to match _the whole_ string ?
-        ) {
+        if(!config.limitURIs() || Util.isAoDUri(request.uri)) {
             return GeckoResult.fromValue(AllowOrDeny.ALLOW);
         } else {
             Log.d(TAG, "Deny non-aod uri: ["+request.uri+"]");

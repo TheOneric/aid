@@ -85,7 +85,7 @@ public class GeckoActivity extends AppCompatActivity {
             geckoRuntime = GeckoRuntime.create(this);
         setUpGecko(geckoRuntime, geckoSession);
 
-        geckoSession.loadUri("https://"+Config.DOMAIN_AOD+"/");
+        geckoSession.loadUri("https://"+Util.DOMAIN_AOD+"/");
 
         hideControl.onSystemUiVisibilityChange(View.SYSTEM_UI_FLAG_FULLSCREEN);
         getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(hideControl);
