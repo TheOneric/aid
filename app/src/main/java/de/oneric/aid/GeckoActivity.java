@@ -19,6 +19,7 @@
 package de.oneric.aid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -55,25 +56,15 @@ public class GeckoActivity extends AppCompatActivity {
     public Config       getConfig()  { return config;       }
 
 
-    View.OnSystemUiVisibilityChangeListener hideControl = (int vis) -> {
-        if((vis & View.SYSTEM_UI_FLAG_FULLSCREEN) != 0) {
-            //Not visible; hide on-screen buttons again
-            geckoView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_IMMERSIVE
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-            );
-        }
-    };
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_fullscreen);
+        // It's a lot of stuff for such a simple GUI
+        setUpGUIShit();
 
         config = new Config(this.getApplicationContext());
+
 
         //Init GeckoView
         geckoView = findViewById(R.id.geckoview);
@@ -83,9 +74,6 @@ public class GeckoActivity extends AppCompatActivity {
         setUpGecko(geckoRuntime, geckoSession);
 
         geckoSession.loadUri("https://"+Util.DOMAIN_AOD+"/");
-
-        hideControl.onSystemUiVisibilityChange(View.SYSTEM_UI_FLAG_FULLSCREEN);
-        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(hideControl);
     }
 
 
@@ -116,6 +104,33 @@ public class GeckoActivity extends AppCompatActivity {
         geckoSession.open(geckoRuntime);
         geckoView.setSession(geckoSession);
         geckoView.setAutofillEnabled(true);
+    }
+
+
+    // ------------  GUI STUFF BELOW, YOU'VE BEEN WARNED -------------------- //
+
+    private void setUpGUIShit() {
+        setContentView(R.layout.activity_fullscreen);
+        Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(tb);
+
+        // Let controls pop in when needed and default to being hidden
+        onSysUIVisibilityChange(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(this::onSysUIVisibilityChange);
+    }
+
+    private void onSysUIVisibilityChange(int vis) {
+        if((vis & View.SYSTEM_UI_FLAG_FULLSCREEN) != 0) {
+            //Not visible; hide on-screen buttons again
+            geckoView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_IMMERSIVE
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            );
+            getSupportActionBar().hide();
+        } else {
+            getSupportActionBar().show();
+        }
     }
 
 
