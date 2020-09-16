@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/go_immersive"
+        android:titleCondensed="Menüs verstecken"
+        android:title="Verstecke Menü und Leisten"
+        app:showAsAction="ifRoom|withText"
+        android:icon="@android:drawable/arrow_up_float"
+    />
+    <item
+        android:id="@+id/login_toggle"
+        android:titleCondensed="Login merken"
+        android:title="Login lokal speichern"
+        android:checkable="true"
+     />
+    <item
+         android:id="@+id/login_clear_action"
+         android:titleCondensed="Logins löschen"
+         android:title="Gespeicherte Logins löschen"
+    />
+    <item
+        android:id="@+id/uri_toggle"
+        android:titleCondensed="Auf AoD bleiben"
+        android:title="URLs auf AoD beschränken"
+        android:checkable="true"
+    />
+
+</menu>
