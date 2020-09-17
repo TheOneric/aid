@@ -24,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -109,6 +110,17 @@ public class GeckoActivity extends AppCompatActivity {
         geckoView.setAutofillEnabled(true);
     }
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch(keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                if(geckoSession != null) geckoSession.goBack();
+                return true;
+            default:
+                return false;
+        }
+    }
 
     // ------------  GUI STUFF BELOW, YOU'VE BEEN WARNED -------------------- //
 
