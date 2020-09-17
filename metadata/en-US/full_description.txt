@@ -1,0 +1,7 @@
+Allows you to conveniently use the German video on demand service 
+anime-on-demand.de. Compared to using the website in the browser, this app makes
+some small adjustments to be touch friendly, and optionally allows to save your 
+login credentials on your devices if you really don't want to use a login 
+manager.
+
+Just like the vod service itself, this app is German language only.

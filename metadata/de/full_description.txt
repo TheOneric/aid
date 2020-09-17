@@ -1,0 +1,7 @@
+Erlaubt die bequeme Nutzung von anime-on-demand.de auf Touch-Geräten.
+Im Vergleich zur Nutzung der Webseite im Browser, bietet diese App ein paar 
+Anpassungen um auch auf Touch-Geräten benutzbar zu sein, sowie optional die 
+Möglichkeit die Login-Daten auf dem Gerät zu speichern, falls AoDs „Login 
+merken“ nicht ausreicht und kein Login-Manager eingesetzt werden kann oder will.
+
+Die App basiert auf GeckoView.
