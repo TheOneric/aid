@@ -25,15 +25,15 @@ Verfügbarkeit
 
 Eine Inklusion in das offizielle F-Droid Repository wird angestrebt.
 
-Momentan wird dies noch durch Binärblobs in GeckoView verhindert (Analytics).
-Dadurch wären Binärbuilds momentan auch nur von mir als momentan alleiniger
-Urheber legal verbreitbar, da es mit den Binärblobs nicht möglich ist den
-GPL-Bedingungen Genüge zu tun.
-Es ist geplant den Buildvorgang anzupassen und aus den GeckoView-Quellcode eine
-saubere Lib zu bauen und für die App zu verwenden.
+Momentan wird dies noch dadurch behindert, dass die GeckoView-Library binär aus
+Mozillas Maven-Repo bezogen wird. Um F-Droid Standards bzgl Reproduzierbarkeit
+und Vertrauenswürdigkeit – damit sich durch solche Binärblobs nicht doch mglw
+propietäre Bestandteile einschleichen – zu genügen, muss der Buildvorgang noch
+umgestellt werden um GeckoView selbst aus den Quellen zu bauen.
 
-Da ich keine Builds mit Binärblobs anbieten will, muss bei Interesse in der
-Zwischenzeit die App selbst kompiliert werden, siehe weiter unten.
+Bis die F-Droid Inklusionskriterien erfüllt sind will ich auch keine
+eigenen APKs anbieten. Wenn du die App jetzt schon testen willst, musst du sie
+selbst kompilieren.
 
 Screenshots
 ===========
