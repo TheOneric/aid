@@ -2,9 +2,13 @@
 AiD: Anime in Deutsch
 =====================
 
-Android App für „Anime on Demand“ — offensichtlich inoffiziell.
-Macht bequeme Verwendung auf Touchgeräten möglich und erlaubt es bei Bedarf
+| Android App für „Anime on Demand“.
+| Macht bequeme Verwendung auf Touchgeräten möglich und erlaubt es bei Bedarf
 Logindaten lokal zu speichern.
+
+AiD ist ein eigenständiges FOSS-Projekt unabhängig von AV Vision, Crunchyroll
+und sonstiger an anime-on-demand.de beteiligter Aktuere.
+Patches und andere Community-Beiträge sind willkommen.
 
 .. image:: metadata/en-US/images/icon.png
    :alt: AiD Icon
