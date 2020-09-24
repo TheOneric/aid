@@ -3,7 +3,11 @@ apply plugin: 'com.android.application'
 ext {
     // Channels are ""(stable), "-beta" and "nightly"
     geckoviewChannel = ""
-    geckoviewVersion = "80.0.20200818235255"
+    if(project.hasProperty("properBuild")) {
+        geckoviewVersion = "[80.0.0, 81.0.0)"
+    } else { //quick and dirty
+        geckoviewVersion = "81.0.20200917005511"
+    }
 }
 
 android {

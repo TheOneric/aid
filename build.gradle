@@ -18,7 +18,11 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://maven.mozilla.org/maven2/" }
+        if(project.hasProperty("properBuild")) {
+            mavenLocal()
+        } else { //quick and dirty
+            maven { url "https://maven.mozilla.org/maven2/" }
+        }
     }
 }
 
