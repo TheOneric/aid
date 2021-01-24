@@ -2,9 +2,35 @@
 AiD: Anime in Deutsch
 =====================
 
+.. note::
+  Die App wird nicht mehr weiterentwickelt.
+  Nutzer können zu TailsxKyuubis_ exzellenter AoD-App wechseln.
+
+Zwar hat mir die Arbeit an der App bestätigt, dass GeckoView eine mächtige und
+einfache zu verwendende Möglichkeit ist Webapps zu erstellen und an die
+spezifischen Bedürfnisse anzupassen, aber, bedingt durch Androids miserables
+Package-Management und GeckoViews daraus resultierendem Fokus auf statischen
+Builds sorgen für Probleme bei der Distribution der App. Die \*.apk ist rießig
+und muss bei jedem GeckoView-Update ebenfalls aktualisiert werden.
+
+Zusätzlich sind die von Mozilla angebotenen GeckoView-Builds **unsauber** und
+enthalten (zum Schreibzeitpunkt) propietäre Dritt- und Tracking-Libraries.
+Eigene Builds sind mit viel Aufwand verbunden und mir gelang es trotz ein paar
+Tipps des FDroid Fennec Maintainers nicht, eigene sauber GeckoView-Builds zu
+erstellen.
+Vorallem diese Schwierigkeit mit sauberen und reproduzierbare Builds hat mich
+davon abgehalten an AiD weiterzuarbeiten.
+
+Inzwischen hat allerdings TailsxKyuubi eine AoD-App mit eigener UI - also nicht
+„nur” ein Wrapper um die Webseite - veröffentlicht; die App macht einen guten
+Eindruck und ich kann TailsxKyuubis_ Arbeit als m.E. bessere Alternative zu
+AiD empfehlen.
+
+--------
+
 | Android App für „Anime on Demand“.
 | Macht bequeme Verwendung auf Touchgeräten möglich und erlaubt es bei Bedarf
-Logindaten lokal zu speichern.
+  Logindaten lokal zu speichern.
 
 AiD ist ein eigenständiges FOSS-Projekt unabhängig von AV Vision, Crunchyroll
 und sonstiger an anime-on-demand.de beteiligter Aktuere.
@@ -213,3 +239,4 @@ GPlv3+.
 .. _KeypassDX: https://f-droid.org/en/packages/com.kunzisoft.keepass.libre/
 .. _Kodi:      https://f-droid.org/en/packages/org.xbmc.kodi/
 .. _`Kodi-Plugin für AoD`: https://github.com/kodinerds/repo/tree/master/plugin.video.aod
+.. _TailsxKyuubis:  https://github.com/TailsxKyuubi/inoffizielle-AoD-App
